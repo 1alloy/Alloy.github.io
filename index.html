@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alloy.sh</title>
+    <style>
+        /* BASE STYLES */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        a { color: #ff3366; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* THE SWITCH: Hidden checkbox for Spotify only */
+        #close-spotify-switch {
+            display: none;
+        }
+
+        /* Logic: When checked, hide Spotify */
+        #close-spotify-switch:checked ~ #spotify-window {
+            display: none;
+        }
+
+        /* WINDOW DECORATION */
+        .window {
+            border: 1px solid #444;
+            background: #000;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.1);
+        }
+
+        .title-bar {
+            border-bottom: 1px solid #444;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            background: #0a0a0a;
+        }
+
+        /* Close Button Styling */
+        .close-btn {
+            background: #ff3366;
+            color: white;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            text-align: center;
+            line-height: 15px;
+            font-size: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* MAIN TERMINAL */
+        #main-terminal {
+            width: 85%;
+            max-width: 950px;
+            height: 75vh;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .ascii-art {
+            color: #ff3366;
+            font-size: 10px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .terminal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .content-box { padding: 15px; }
+        .pink { color: #ff3366; }
+        .dim { color: #777; }
+        .bold { font-weight: bold; }
+
+        /* The alloy-name span for background placement */
+        .alloy-name {
+            display: inline-block;
+            vertical-align: middle;
+            background-image: url('image_3.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: auto 1.4em; /* Slightly taller than text height */
+            padding: 0 10px; /* Small padding to frame the text */
+            text-align: center;
+            color: white; /* Ensure text remains white against the image */
+        }
+
+        /* SPOTIFY POP-UP */
+        #spotify-window {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 320px;
+            z-index: 100;
+        }
+
+        .album-art {
+            width: 80px;
+            height: 80px;
+            background-image: url('image_cc59e1.png'); /* AJR OK ORCHESTRA */
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="checkbox" id="close-spotify-switch">
+
+    <div class="window" id="main-terminal">
+        <div class="title-bar">
+            <span>alloy@archlinux: ~</span>
+            </div>
+        <div class="content-box">
+            <pre class="ascii-art">
+    ___    __    __    ____  __  __
+   /   |  / /   / /   / __ \/ / / /
+  / /| | / /   / /   / / / / /_/ / 
+ / ___ |/ /___/ /___/ /_/ /____  /  
+/_/  |_/_____/_____/\____/____/_/   
+            </pre>
+
+            <div class="terminal-grid">
+                <div>
+                    <p class="pink">> cat about_me.md</p>
+                    <p><span class="bold">Name:</span> <span class="alloy-name">Alloy</span></p>
+                    <p><span class="bold">Age:</span> 16</p>
+                    <p><span class="bold">Gender:</span> Female</p>
+                    <p><span class="bold">Pronouns:</span> She/He/They</p>
+                    <p class="dim">"I use Discord a lot because I'm Silly :P"</p>
+                </div>
+
+                <div>
+                    <p class="pink">> neofetch</p>
+                    <p><span class="pink">OS:</span> Arch Linux</p>
+                    <p><span class="pink">WM:</span> Hyprland</p>
+                    <p><span class="pink">CPU:</span> Intel i7-12700K</p>
+                    <p><span class="pink">GPU:</span> AMD RX 6600 XT</p>
+                    <p><span class="pink">RAM:</span> 32GB</p>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #444; margin: 20px 0;">
+            
+            <p class="pink">> ls contact_info/</p>
+            <p>
+                <span class="bold">Discord:</span> 1Alloy | 
+                <span class="bold">Github:</span> <a href="https://github.com/A1Ioy" target="_blank">A1Ioy</a> | 
+                <span class="bold">Twitch:</span> <a href="https://twitch.tv/A1loyVT" target="_blank">A1loyVT</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="window" id="spotify-window">
+        <div class="title-bar">
+            <span>Listening to Spotify</span>
+            <label for="close-spotify-switch" class="close-btn">X</label>
+        </div>
+        <div class="content-box" style="display:flex; gap: 15px; align-items: center;">
+            <div class="album-art"></div>
+            <div style="flex:1">
+                <div class="bold" style="font-size: 14px;">World's Smallest Violin</div>
+                <div class="pink" style="font-size: 12px;">AJR</div>
+                <div style="width:100%; height:4px; background:#333; margin:8px 0;">
+                    <div style="width:75%; height:100%; background:#ff3366;"></div>
+                </div>
+                <div class="dim" style="font-size: 10px;">02:18 / 03:00</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
